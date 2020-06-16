@@ -13,10 +13,14 @@ class UserInfo extends StatelessWidget {
         return Container(
           child: state is FetchDetailLoaded
               ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
                       '${state.user.nickname}',
                       style: userDetailNicknameTheme,
+                    ),
+                    Divider(
+                      color: Colors.grey[100],
                     ),
                     _detailListTile(
                       icon: Icons.location_on,
@@ -53,12 +57,14 @@ class _detailListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(icon, color: Colors.white),
-      title: Text(
-        '${titleKey} : ${titleValue ?? noAvaliable}',
-        style: detailTextTheme,
-      ),
+    return Row(
+      children: <Widget>[
+        Icon(icon, color: Colors.white),
+        Text(
+          '${titleKey} : ${titleValue ?? noAvaliable}',
+          style: detailTextTheme,
+        ),
+      ],
     );
   }
 }
