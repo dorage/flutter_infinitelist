@@ -7,9 +7,8 @@ class UserProvider {
   /// since번째 부터 perPage 수만큼의 user 리스트를 불러옵니다.
   Future<dynamic> getUsers({@required int since, @required int perPage}) async {
     final client = Client();
-    final response = await client.get(
-        'https://api.github.com/users?since=${since}&per_page=${perPage}',
-        headers: {"": ""});
+    final response = await client
+        .get('https://api.github.com/users?since=${since}&per_page=${perPage}');
     if (response.statusCode != 200) {
       throw UsersError(body: response.body);
     }

@@ -10,8 +10,6 @@ abstract class FetchState extends Equatable {
 
 class FetchInitial extends FetchState {}
 
-class FetchLoading extends FetchState {}
-
 class FetchFailure extends FetchState {
   final Error error;
 
@@ -39,5 +37,5 @@ class FetchLoaded extends FetchState {
 
   @override
   String toString() =>
-      'FetchLoaded { users: ${users.length}, hasReachedMax: $hasReachedMax';
+      'FetchLoaded { users: ${users.length}, hasReachedMax: $hasReachedMax }';
 }

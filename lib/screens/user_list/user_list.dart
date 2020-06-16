@@ -29,7 +29,7 @@ class _UserListState extends State<UserList> {
         title: Container(
           child: Image.asset(
             'assets/images/github_logo_w.png',
-            height: 60,
+            height: AppBar().preferredSize.height,
           ),
         ),
       ),
@@ -44,26 +44,18 @@ class _UserListState extends State<UserList> {
             return Text('Error');
           }
           if (state is FetchLoaded) {
+            print(state.users.length);
             return ListView.builder(
               controller: _scrollController,
-              itemCount: state.hasReachedMax
-                  ? state.users.length
-                  : state.users.length + 1,
+              itemCount: state.users.length,
               itemBuilder: (context, index) {
-                if (state.hasReachedMax && index == state.users.length - 1) {
-                  return ListViewItemWithCircular();
-                }
                 return ListViewItem(
                   user: state.users[index],
                 );
               },
             );
           }
-          if (state is FetchLoading) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+          return null;
         },
       ),
     );
@@ -71,7 +63,7 @@ class _UserListState extends State<UserList> {
 
   void _onScroll() {
     final maxScroll = _scrollController.position.maxScrollExtent;
-    final currentScroll = _scrollController.position.pixels;
+    final currentScroll = _scrollController.offset;
     if (maxScroll - currentScroll <= _scrollThreshold) {
       _fetchBloc.add(Fetch());
     }

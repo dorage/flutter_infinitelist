@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 class RoundNavigationButton extends StatelessWidget {
   final Function onPressed;
-  final List<Widget> children;
+  final Widget child;
+  final double height;
 
   const RoundNavigationButton({
     Key key,
     @required this.onPressed,
-    @required this.children,
+    @required this.child,
+    this.height = 150.0,
   }) : super(key: key);
 
   @override
@@ -15,7 +17,7 @@ class RoundNavigationButton extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        height: 150,
+        height: height,
         margin: EdgeInsets.all(5),
         padding: EdgeInsets.only(left: 20),
         decoration: BoxDecoration(
@@ -26,12 +28,9 @@ class RoundNavigationButton extends StatelessWidget {
             ),
           ],
           color: Colors.black,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(height / 15),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: children,
-        ),
+        child: child,
       ),
     );
   }

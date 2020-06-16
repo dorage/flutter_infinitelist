@@ -23,7 +23,6 @@ class FetchBloc extends Bloc<FetchEvent, FetchState> {
   ) async* {
     final currentState = state;
     if (event is Fetch && !_hasReachedMax(currentState)) {
-      yield FetchLoading();
       try {
         // 첫 Fetch
         if (currentState is FetchInitial) {
@@ -46,9 +45,13 @@ class FetchBloc extends Bloc<FetchEvent, FetchState> {
           final hasReachedMax = users.isEmpty;
           yield hasReachedMax
               ? currentState.copyWith(
+                  users: currentState.users,
+                  hasReachedMax: hasReachedMax,
+                )
+              : FetchLoaded(
                   users: currentState.users + users,
-                  hasReachedMax: hasReachedMax)
-              : FetchLoaded(users: users, hasReachedMax: hasReachedMax);
+                  hasReachedMax: hasReachedMax,
+                );
         }
       } catch (error) {
         yield FetchFailure(error: error);

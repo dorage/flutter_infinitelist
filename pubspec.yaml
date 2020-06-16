@@ -15,7 +15,7 @@ dependencies:
     flutter_bloc: ^4.0.0
     http: ^0.12.1
     pedantic: ^1.9.0
-    flexiblelayout: ^1.0.0+1
+    flexiblelayout: ^1.0.1+1
     url_launcher: ^5.4.10
 
 dev_dependencies:
